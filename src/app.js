@@ -22,7 +22,7 @@ const requestHandler = (req,res) => {
           res.setHeader('Content-Type', 'text/html');
           res.statusCode = 200;
           res.statusMessage = 'OK';
-          res.write(data.toString());
+          res.write(data.toString().replace('{{cowsay}}', cowsay.say({text: 'What does the cow say?'})));
           res.end();
           return;
         });
@@ -61,10 +61,12 @@ const requestHandler = (req,res) => {
             content = 'Invalid request:';
           }
           else if(!req.body.text) {
+            res.statusCode = 400;
+            res.write(JSON.stringify({error: 'invalid request: text query required'}));
             content = 'Invalid content: text query required';
           }
           else { 
-            content = cowsay.say({text: req.url.query.text, e: 'oO'});
+            content = cowsay.say({text: req.body.text});
           }
           let text = data.toString();
           let obj = {content: content};
@@ -82,7 +84,7 @@ const requestHandler = (req,res) => {
         res.setHeader('Content-Type', 'text/html');
         res.statusCode = 404;
         res.statusMessage = 'Not Found';
-        res.write('Error 404 Not Found');
+        res.write('invalid request: text query required');
         res.end();
       }
 
