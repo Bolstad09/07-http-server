@@ -33,7 +33,6 @@ describe('Simple Web Server', () => {
   });
 
   it('handles a get request with a query string', () => {
-
     return superagent.get('http://localhost:3002/?you=here')
       .then(response => {
         expect(response.statusCode).toEqual(200);
