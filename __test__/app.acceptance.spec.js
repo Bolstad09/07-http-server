@@ -40,7 +40,5 @@ describe('Simple Web Server', () => {
         expect(response.text).toEqual(expect.stringContaining('here'));
       })
       .catch(console.err);
-
   });
-
 });
