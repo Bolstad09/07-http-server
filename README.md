@@ -1,1 +1,0 @@
-[![Build Status](https://travis-ci.com/Bolstad09/07-http-server.svg?branch=master)](https://travis-ci.com/Bolstad09/07-http-server)
