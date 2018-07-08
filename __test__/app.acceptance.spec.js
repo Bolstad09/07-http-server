@@ -6,7 +6,7 @@ const app = require('../src/app.js');
 describe('Simple Web Server', () => {
 
   beforeAll( () => {
-    app.start(3000);
+    app.start(3002);
   });
 
   afterAll( () => {
@@ -33,25 +33,11 @@ describe('Simple Web Server', () => {
   });
 
   it('handles a get request with a query string', () => {
-
     return superagent.get('http://localhost:3002/?you=here')
       .then(response => {
         expect(response.statusCode).toEqual(200);
         expect(response.text).toEqual(expect.stringContaining('here'));
       })
       .catch(console.err);
-
   });
-
-  it('handles a good post request', () => {
-    let obj = {name:'Fred'};
-    let expected = JSON.stringify(obj);
-    return superagent.post('http://localhost:3002/data')
-      .send(obj)
-      .then(response => {
-        expect(response.text).toEqual(expected);
-      })
-      .catch(console.err);
-  });
-
 });
